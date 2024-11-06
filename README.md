@@ -34,7 +34,9 @@ pip install ttkbootstrap
 3. Run the following command:
 
 ```bash
-python main.py
+git clone https://github.com/IHEfty/WoohNote.git
+cd WoohNote
+python wooh.py
 ```
 
 ## How to Use Wooh Note
