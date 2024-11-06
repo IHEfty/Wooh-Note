@@ -1,4 +1,6 @@
 # Wooh Note
+![Preview 1](./res/1.png)
+![Preview 2](./res/2.png)
 
 Wooh Note is a simple note-taking application built with Python and Tkinter, with a dark and light theme toggle. It allows users to create, save, and delete notes, with saved notes stored in a JSON file for easy retrieval.
 
