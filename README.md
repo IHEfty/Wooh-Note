@@ -51,7 +51,7 @@ python wooh.py
 
 ## License
 
-This project is licensed under the MIT license. See LICENSE for details.
+This project is licensed under the MIT license. See [LICENSE](LICENSE) for details.
 
 ## Contributing
 
