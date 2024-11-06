@@ -14,18 +14,17 @@ Wooh Note is a simple note-taking application built with Python and Tkinter, wit
 - **Python 3.6+**: Make sure Python is installed on your machine. [Download Python](https://www.python.org/downloads/)
 - **ttkbootstrap**: A Python package for theme styling in Tkinter.
 
-### Installing Dependencies
-
-Run the following command to install required packages:
-
-```bash
-pip install ttkbootstrap
-```
-
 ## Installation
 
 1. Clone this repository or download the source code files to your machine.
-2. Ensure the `ttkbootstrap` library is installed.
+2. Run `pip install -r requirements.txt` to install the dependencies.
+   or Install them manually:
+
+  ```bash
+  pip install tkinter
+  pip install json
+  pip install ttkbootstrap
+  ```
 
 ## Running Wooh Note
 
@@ -49,6 +48,14 @@ python wooh.py
 
 - `main.py`: The main application file.
 - `notes.json`: A file where notes are saved and loaded from.
+
+## License
+
+This project is licensed under the MIT license. See LICENSE for details.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or pull request on GitHub.
 
 ### Note
 
