@@ -24,6 +24,19 @@ try:
 except FileNotFoundError:
     pass 
 
+def save_all_notes():
+    """
+    Save all notes to notes.json.
+    """
+    for i in range(notebook.index("end")):
+        note_title = notebook.tab(i, "text")
+        if isinstance(notebook.nametowidget(notebook.tabs()[i]), tk.Text):
+            content = notebook.nametowidget(notebook.tabs()[i]).get("1.0", tk.END).strip()
+            notes[note_title] = content
+
+    with open("notes.json", "w") as f:
+        json.dump(notes, f)
+
 def toggle_theme():
     if style.theme_use() == "darkly":
         style.theme_use("journal")  
@@ -49,7 +62,7 @@ def add_note():
     content_label = ttk.Label(note_frame, text="Content:")
     content_label.grid(row=1, column=0, padx=10, pady=10, sticky="W")
 
-    content_entry = tk.Text(note_frame, width=40, height=10)
+    content_entry = tk.Text(note_frame, width=40, height=10, undo=True)
     content_entry.grid(row=1, column=1, padx=10, pady=10)
 
     def save_note():
@@ -60,7 +73,7 @@ def add_note():
             with open("notes.json", "w") as f:
                 json.dump(notes, f)
 
-            note_content = tk.Text(notebook, width=40, height=10)
+            note_content = tk.Text(notebook, width=40, height=10, undo=True)
             note_content.insert(tk.END, content)
             notebook.forget(notebook.select())
             notebook.add(note_content, text=title)
@@ -76,7 +89,7 @@ def load_notes():
             notes = json.load(f)
 
         for title, content in notes.items():
-            note_content = tk.Text(notebook, width=40, height=10)
+            note_content = tk.Text(notebook, width=40, height=10, undo=True)
             note_content.insert(tk.END, content)
             notebook.add(note_content, text=title)
 
@@ -93,8 +106,15 @@ def delete_note():
     if confirm:
         notebook.forget(current_tab)
         notes.pop(note_title, None)
-        with open("notes.python main.pyjson", "w") as f:
+        with open("notes.json", "w") as f:
             json.dump(notes, f)
+
+def on_save_shortcut(event=None):
+    """
+    Save all notes when Ctrl+S is pressed.
+    """
+    save_all_notes()
+    messagebox.showinfo("Saved", "Wooh > All notes have been saved!")
 
 new_button = ttk.Button(root, text="New", command=add_note, style="dark.TButton")
 new_button.pack(side=tk.LEFT, padx=10, pady=10)
@@ -104,5 +124,13 @@ delete_button.pack(side=tk.LEFT, padx=10, pady=10)
 
 theme_button = ttk.Button(root, text="Toggle Theme", command=toggle_theme)
 theme_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+root.bind("<Control-s>", on_save_shortcut)
+
+def auto_save():
+    save_all_notes()
+    root.after(10000, auto_save)
+
+auto_save()  
 
 root.mainloop()
